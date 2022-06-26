@@ -1,0 +1,12 @@
+spacy~=3.2.4
+blackstone~=0.1.15
+plac~=0.9.6
+tqdm~=4.64.0
+wasabi~=0.9.1
+numpy~=1.22.3
+preshed~=3.0.6
+streamlit~=1.8.1
+requests~=2.27.1
+beautifulsoup4~=4.11.1
+setuptools~=60.2.0
+scispacy~=0.5.0

@@ -1,3 +1,4 @@
+#DISCLAIMER: THIS FILE MAINLY USE THE WORK OF TRISTAN KOH, AVAILABLE HERE : https://github.com/TristanKoh/blackstone-legal-cat/blob/master/code/blackstone_text_cat.ipynb
 from pathlib import Path
 import pandas as pd
 

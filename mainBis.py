@@ -1,4 +1,6 @@
 import spacy
+import pandas as pd
+from pathlib import Path
 
 # Load the model
 nlp = spacy.load("en_blackstone_proto")
@@ -14,7 +16,11 @@ def get_top_cat(doc):
     max_cat = max_cats[0]
     return (max_cat, max_score)
 
-case = open("/home/tristan/Stage/TextesJuridiques/BordenvUnitedStatesKagan.txt")
+#We ask the user the path to the file he wants to use.
+file_path = Path(input("Enter the file path: ").strip())
+file_name = input("Enter the file name with extension (.txt): ".strip())
+file_full_path = file_path / file_name
+case = open(file_full_path, 'r')
 
 
 # Run the function on the string
@@ -29,10 +35,21 @@ doc = nlp(text)
 # Get the sentences in the passage of text
 sentences = [sent.text for sent in doc.sents]
 
-
-f = open("/home/tristan/Stage/EtudeLogiciels/ExplicationBlackstone/BordenvUSA/BordenvUSA_Kagan.txt", "w")
+#We write the result in a txt file using a result path given by the user
+result_file_path = Path(input("Enter the file path: ").strip())
+result_file_name = input("Enter the file name with extension (.txt): ".strip())
+result_file_full_path = file_path / result_file_name
+f = open(result_file_full_path, "w")
 # Print the sentence and the corresponding predicted category.
 for sentence in sentences:
     doc = nlp(sentence)
     top_category = get_top_cat(doc)
     print (f"\"{sentence}\"|{top_category[0]}", file=f)
+
+#We write the result in a csv file using the result path given by the user
+#Note that the csv file will in fact be separated with a | and not with a comma. When opening it, choose the right settings, depending on the software you use.
+csv_file_name = input("Enter the file name with extension (.csv): ".strip())
+csv_file_full_path = result_file_path / csv_file_name
+
+read_file = pd.read_csv (result_file_full_path)
+read_file.to_csv (csv_file_full_path, index=None)
